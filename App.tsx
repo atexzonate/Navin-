@@ -1,21 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import {DrawerContentScrollView, DrawerItem, DrawerItemList} from '@react-navigation/drawer';
+import MainTabScreen from './Screens/MainTabScreen';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+import {DrawerContent} from './Screens/DrawerContent';
+import SupportScreen from './Screens/SupportScreen';
+import SettingsScreen from './Screens/SettingsScreen';
+import BookmarkScreen from './Screens/BookmarkScreen';
+
+
+const Drawer = createDrawerNavigator();
+
+
+
+
+const App = () => {
+     return (
+          <NavigationContainer>
+               <Drawer.Navigator 
+                    drawerContent={props => <DrawerContent { ...props}/> }
+               >
+                    <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
+                    <Drawer.Screen name="Support" component={SupportScreen}/>
+                    <Drawer.Screen name="Setting" component={SettingsScreen}/>
+                    <Drawer.Screen name="Bookmark" component={BookmarkScreen}/>
+               </Drawer.Navigator>
+               
+          </NavigationContainer>
+     );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
